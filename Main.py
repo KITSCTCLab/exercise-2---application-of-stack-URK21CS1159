@@ -26,9 +26,9 @@ class Evaluate:
     """
       # Write your code here
       if self.top == -1 :
-           return 1
+           return True
         else:
-           return 0
+           return False
 
 
   def pop(self):
