@@ -64,12 +64,12 @@ class Evaluate:
       True if the expression is valid, else returns False.
     """
     # Write your code here
-         if(expression=='+' || expression=='-' || expression=='*' || expression=='/'){
+         if(expression=='+' || expression=='-' || expression=='*' || expression=='/')
             return 1
-          }
-         else{
+          
+         else
              return 0
-             }
+             
 
 
   def evaluate_postfix_expression(self, expression):
