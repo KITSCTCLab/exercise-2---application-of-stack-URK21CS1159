@@ -15,7 +15,7 @@ class Evaluate:
     """
     self.top = -1
     self.size_of_stack = size
-    self.stack = [None]*size
+    self.stack = []
 
 
   def isEmpty(self):
@@ -25,11 +25,7 @@ class Evaluate:
       True if it is empty, else returns False.
     """
       # Write your code here
-      if self.top == -1 :
-           return 1
-        else:
-           return 0
-
+      return len(self.stack)==0
 
   def pop(self):
     """
@@ -38,9 +34,10 @@ class Evaluate:
       The data which is popped out if the stack is not empty.
     """
     # Write your code here
-    if not self.is_empty()==1:
+    if not self.is_empty():
             # Write code here
             self.top = self.top-1
+            return self.stack.pop(-1)
 
 
   def push(self, operand):
@@ -52,7 +49,7 @@ class Evaluate:
     # Write your code here
     if not self.is_full()==1:
             self.top=self.top+1
-            self.items[self.top]=operand
+            self.stack.append(operand)
 
 
   def validate_postfix_expression(self, expression):
@@ -64,11 +61,11 @@ class Evaluate:
       True if the expression is valid, else returns False.
     """
     # Write your code here
-         if(expression=='+' || expression=='-' || expression=='*' || expression=='/')
-            return 1
-          
-         else
-             return 0
+        operands = [element for element in expression if element.isdigit()]
+    operators = [element for element in expression  if element in ["+", "-", "*", "/", "^"]]
+    if (len(operands) + len(operators)) == len(expression) and len(operands) == len(operators) + 1:
+        return expression[0] not in operators and expression[1] not in operators
+
              
 
 
@@ -79,19 +76,25 @@ class Evaluate:
       expression: A String which represents the the expression to be evaluated
     Returns:
       The result of evaluated postfix expression.  """
-       for i in expression:
-              
-            
-            if i.isdigit():
-                self.push(i)
-  
-         
-            else:
-                val1 = self.pop()
-                val2 = self.pop()
-                self.push(str(eval(val2 + i + val1)))
-  
-        return int(self.pop())
+       self.stack = []
+    for element in expression:
+      if element.isdigit():
+        self.push(int(element))
+      elif element in ["+", "-", "*", "/", "^"]:
+        if element == "+":
+          result = self.stack[-2] + self.stack[-1]
+        elif element == "-":
+          result = self.stack[-2] - self.stack[-1]
+        elif element == "*":
+          result = self.stack[-2] * self.stack[-1]
+        elif element == "/":
+          result = self.stack[-2] // self.stack[-1]
+        elif element == "^":
+          result = self.stack[-2] ** self.stack[-1]
+        self.pop()
+        self.pop()
+        self.push(result)
+    return self.pop()
   
     # Write your code here
 
