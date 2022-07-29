@@ -15,7 +15,7 @@ class Evaluate:
     """
     self.top = -1
     self.size_of_stack = size
-    self.stack = []
+    self.stack = [None]*size
 
 
   def isEmpty(self):
@@ -26,9 +26,9 @@ class Evaluate:
     """
       # Write your code here
       if self.top == -1 :
-           return True
+           return 1
         else:
-           return False
+           return 0
 
 
   def pop(self):
