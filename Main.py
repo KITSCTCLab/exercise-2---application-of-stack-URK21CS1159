@@ -72,8 +72,21 @@ class Evaluate:
     Arguments:
       expression: A String which represents the the expression to be evaluated
     Returns:
-      The result of evaluated postfix expression.
-    """
+      The result of evaluated postfix expression.  """
+       for i in expression:
+              
+            
+            if i.isdigit():
+                self.push(i)
+  
+         
+            else:
+                val1 = self.pop()
+                val2 = self.pop()
+                self.push(str(eval(val2 + i + val1)))
+  
+        return int(self.pop())
+  
     # Write your code here
 
 
